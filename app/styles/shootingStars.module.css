@@ -1,0 +1,192 @@
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  overflow-x: hidden;
+  transform: rotateZ(20deg);
+}
+
+.star {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  left: var(--posx);
+  top: var(--posy);
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(
+    -45deg,
+    rgba(95, 145, 255, 1),
+    rgba(0, 95, 255, 0)
+  );
+  border-radius: 999px;
+  /* Blue glow for light mode */
+  filter: drop-shadow(0 0 6px rgba(105, 155, 255, 1));
+  animation: tail var(--speed) var(--delay) ease-in-out infinite,
+    shooting var(--speed) var(--delay) ease-in-out infinite;
+}
+
+.star::before {
+  content: '';
+  position: absolute;
+  top: calc(50% - 1px);
+  right: 0;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(-45deg, rgba(0, 95, 255, 0), rgba(95, 145, 255, 1), rgba(0, 95, 255, 0));
+  border-radius: 100%;
+  transform: translateX(50%) rotateZ(45deg);
+}
+
+.star::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 1px);
+  right: 0;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(-45deg, rgba(0, 95, 255, 0), rgba(95, 145, 255, 1), rgba(0, 95, 255, 0));
+  border-radius: 100%;
+  transform: translateX(50%) rotateZ(-45deg);
+}
+
+@keyframes tail {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+    visibility: visible;
+    width: 0;
+  }
+  30% {
+    opacity: 1;
+    visibility: visible;
+    width: 100px;
+  }
+  99% {
+    opacity: 1;
+    visibility: visible;
+    width: 0;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+  }
+}
+
+@keyframes shining {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+    visibility: visible;
+    width: 0;
+  }
+  50% {
+    opacity: 1;
+    visibility: visible;
+    width: 30px;
+  }
+  99% {
+    opacity: 1;
+    visibility: visible;
+    width: 0;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+  }
+}
+
+@keyframes shooting {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(0);
+  }
+  1% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  99% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(300px);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(300px);
+  }
+}
+
+@keyframes flameFlicker {
+  0%,
+  100% {
+    opacity: 0.92;
+    filter: drop-shadow(0 0 10px rgba(255, 190, 80, 0.9))
+      drop-shadow(0 0 26px rgba(255, 70, 0, 0.26));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(255, 220, 140, 1))
+      drop-shadow(0 0 34px rgba(255, 70, 0, 0.34));
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Dark theme: make the streaks look like fiery meteors / flames          */
+/* -------------------------------------------------------------------------- */
+
+:global(html[data-theme='dark']) .star {
+  /* Flame head with ember tail (dark mode) */
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 245, 170, 1) 0%,
+    rgba(255, 196, 70, 0.98) 22%,
+    rgba(255, 120, 20, 0.7) 55%,
+    rgba(255, 70, 0, 0) 100%
+  );
+  border-radius: 999px;
+
+  /* Warm glow (stronger + softer) */
+  filter: drop-shadow(0 0 10px rgba(255, 190, 80, 0.95))
+    drop-shadow(0 0 26px rgba(255, 70, 0, 0.35));
+
+  /* Add a subtle flame flicker on top of the existing movement. */
+  animation:
+    tail var(--speed) var(--delay) ease-in-out infinite,
+    shooting var(--speed) var(--delay) ease-in-out infinite,
+    flameFlicker 0.8s ease-in-out infinite;
+}
+
+:global(html[data-theme='dark']) .star::before {
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 70, 0, 0),
+    rgba(255, 235, 140, 1) 30%,
+    rgba(255, 150, 40, 0.9) 55%,
+    rgba(255, 70, 0, 0) 100%
+  );
+}
+
+:global(html[data-theme='dark']) .star::after {
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 70, 0, 0),
+    rgba(255, 235, 140, 1) 30%,
+    rgba(255, 150, 40, 0.9) 55%,
+    rgba(255, 70, 0, 0) 100%
+  );
+}
