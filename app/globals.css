@@ -9,6 +9,12 @@ html {
 
 /* ---- THEME TOKENS (LIGHT / DARK) ---- */
 :root {
+  /* Self-hosted fonts (@fontsource/*) — no Google Fonts fetch at build time */
+  --font-body-en: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-body-ar: "Tajawal", "Segoe UI", Tahoma, sans-serif;
+  --font-logo: "Pacifico", cursive;
+
   /* base colors - LIGHT THEME by default */
   --background: #f9fafb; /* light gray */
   --foreground: #020617; /* near-black */

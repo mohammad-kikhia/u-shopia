@@ -195,6 +195,17 @@
     "submit": "Send message"
   },
 
+  "contact": {
+    "success": "Your message was sent.",
+    "errors": {
+      "invalid_name": "Please enter a valid name.",
+      "invalid_email": "Please enter a valid email address.",
+      "invalid_subject": "Please enter a valid subject.",
+      "invalid_message": "Please enter a valid message.",
+      "default": "Could not send your message. Please try again."
+    }
+  },
+
   "footer": {
     "title": "uShopia",
     "subtext": "Welcome to uShopia, your one-stop shop for quality products at great prices.",

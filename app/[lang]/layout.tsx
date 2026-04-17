@@ -1,7 +1,14 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
-import { Pacifico, Poppins, Tajawal } from "next/font/google";
+import "@fontsource/poppins/latin-400.css";
+import "@fontsource/poppins/latin-500.css";
+import "@fontsource/poppins/latin-600.css";
+import "@fontsource/poppins/latin-700.css";
+import "@fontsource/tajawal/arabic-400.css";
+import "@fontsource/tajawal/arabic-500.css";
+import "@fontsource/tajawal/arabic-700.css";
+import "@fontsource/pacifico/latin-400.css";
 import Providers from "./providers";
 import { getDictionary, hasLocale } from "./dictionaries";
 import Footer from "@/components/footer/Footer";
@@ -10,27 +17,6 @@ import { rtlLanguages } from "@/data/variables";
 import "../globals.css";
 import "aos/dist/aos.css";
 import ScrollToTopButton from "@/components/layout/ScrollToTopButton";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  variable: "--font-body-en",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
-
-const tajawal = Tajawal({
-  subsets: ["arabic"],
-  variable: "--font-body-ar",
-  display: "swap",
-  weight: ["400", "500", "700"],
-});
-
-const pacifico = Pacifico({
-  subsets: ["latin"],
-  variable: "--font-logo",
-  display: "swap",
-  weight: "400",
-});
 
 export async function generateStaticParams() {
   return [{ lang: "en" }, { lang: "ar" }];
@@ -126,7 +112,7 @@ export default async function RootLayout({
 
   return (
     <html
-      className={`overflow-x-hidden ${poppins.variable} ${tajawal.variable} ${pacifico.variable} ${theme === "dark" ? "dark" : ""}`}
+      className={`overflow-x-hidden ${theme === "dark" ? "dark" : ""}`}
       lang={lang}
       dir={rtlLanguages.includes(lang) ? "rtl" : "ltr"}
       data-scroll-behavior="smooth"
