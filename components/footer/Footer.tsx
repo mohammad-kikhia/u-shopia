@@ -3,7 +3,12 @@
 import Link from "next/link";
 import Iconify from "@/components/shared/Iconify";
 import { DirectionalIcon } from "@/components/shared/DirectionalIcon";
-import { contactMethods, footerPages, socials } from "@/data/variables";
+import {
+  contactMethods,
+  footerPages,
+  githubLink,
+  socials,
+} from "@/data/variables";
 import { Locale } from "@/app/[lang]/dictionaries";
 import type { Trans } from "@/types";
 
@@ -183,7 +188,7 @@ const Footer = ({ lang, t }: { lang: Locale; t: Trans }) => {
               <a
                 target="_blank"
                 rel="noreferrer"
-                href="https://www.github.com/M7MD-abo-jacob/"
+                href={githubLink}
                 className="font-medium text-accent underline-offset-2 hover:underline"
               >
                 {t.common.metadata.author}

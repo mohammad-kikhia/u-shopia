@@ -30,6 +30,8 @@ See `docs/` for auth, cart, API, and env (e.g. `BACKEND_API_BASE_URL`, `NEXT_PUB
 
 Use `components/shared/DirectionalIcon.tsx` for horizontal arrows/chevrons: one LTR icon + `rtl:rotate-180` instead of swapping icon names.
 
+<!--
+
 ## TODO / backlog
 
 - Prune **unused** layout/components left from earlier iterations (spot-check `components/layout/` legacy files)
@@ -38,6 +40,4 @@ Use `components/shared/DirectionalIcon.tsx` for horizontal arrows/chevrons: one 
 - **Content**: replace placeholder copy where still using lorem-style blocks
 - **GIT**: connect the new repo and push the code
 
-<!-- GIT REMOTE REPO: -->
-<!-- https: https://github.com/mohammad-kikhia/u-shopia.git -->
-<!-- SSH: git@github.com:mohammad-kikhia/u-shopia.git -->
+-->
