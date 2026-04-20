@@ -64,10 +64,6 @@ export async function generateMetadata({
       default: dictionary.home.title,
     },
     description: metaData.description,
-    icons: {
-      icon: [{ url: "/icon", type: "image/png", sizes: "32x32" }],
-      apple: [{ url: "/icon", sizes: "180x180", type: "image/png" }],
-    },
     robots: {
       index: true,
       follow: true,

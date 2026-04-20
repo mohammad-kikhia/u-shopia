@@ -240,10 +240,6 @@ export default function ProductsView({
                         key={productId}
                         href={`/${lang}/products/${productSlug}`}
                         className="group relative overflow-hidden rounded-2xl border border-slate-200/60 bg-linear-to-b from-white/60 to-white/30 p-0 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-accent/40 dark:from-slate-900/60 dark:to-slate-900/30 dark:border-slate-800"
-                        data-aos="fade-up"
-                        data-aos-duration="480"
-                        data-aos-delay={Math.min(index * 40, 320)}
-                        data-aos-easing="ease-out-cubic"
                       >
                         <div className="relative flex aspect-square items-center justify-center rounded-t-2xl bg-slate-100/70 p-4 dark:bg-slate-900">
                           <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(99,102,241,0.12),transparent_50%)] opacity-90" />
