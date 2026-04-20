@@ -1,13 +1,17 @@
 import { ImageResponse } from 'next/og';
 import { cookies } from 'next/headers';
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
 
 // Matches app/globals.css theme tokens
 const ACCENT_LIGHT = '#2563eb';
 const ACCENT_DARK = '#3b82f6';
 const BG_LIGHT = '#f9fafb';
 const BG_DARK = '#0e1118';
+
+// tabler:shopping-bag-heart (same mark as Navbar) — inlined so /icon works without public files on the server
+const LOGO_PATH_D = [
+  'M11.5 21H8.574a3 3 0 0 1-2.965-2.544l-1.255-8.152A2 2 0 0 1 6.331 8H17.67a2 2 0 0 1 1.977 2.304q-.086.552-.127.828',
+  'M9 11V6a3 3 0 0 1 6 0v5m3 11l3.35-3.284a2.143 2.143 0 0 0 .005-3.071a2.24 2.24 0 0 0-3.129-.006l-.224.22l-.223-.22a2.24 2.24 0 0 0-3.128-.006a2.143 2.143 0 0 0-.006 3.071z',
+] as const;
 
 export const size = {
   width: 32,
@@ -22,10 +26,6 @@ export default async function Icon() {
 
   const accent = isDark ? ACCENT_DARK : ACCENT_LIGHT;
   const background = isDark ? BG_DARK : BG_LIGHT;
-  const logoPath = path.join(process.cwd(), 'public', 'assets', 'img', 'logo.svg');
-  const rawLogo = await readFile(logoPath, 'utf8');
-  // ImageResponse/Satori does not reliably paint <img src="data:image/svg+xml,..."> — use inline SVG.
-  const pathDs = [...rawLogo.matchAll(/<path[^>]+d="([^"]+)"/g)].map((m) => m[1]);
 
   return new ImageResponse(
     (
@@ -54,7 +54,7 @@ export default async function Icon() {
             strokeLinejoin="round"
             strokeWidth="2"
           >
-            {pathDs.map((d) => (
+            {LOGO_PATH_D.map((d) => (
               <path key={d} d={d} />
             ))}
           </g>
