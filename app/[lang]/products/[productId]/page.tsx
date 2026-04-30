@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import { getDictionary } from "../../dictionaries";
 import ProductDetailsView from "@/sections/products/product-details-view";
 import ProductJsonLd from "@/components/seo/ProductJsonLd";
+import { SITE_ORIGIN } from "@/data/costants";
 import "../../../styles/globals.css";
 import { notFound } from "next/navigation";
 import { fetchProductBySlugServer } from "@/lib/api/escuelajs";
 import { stripHtmlToPlainText } from "@/lib/seo/plain-text";
 import { toAbsoluteUrl } from "@/lib/seo/absolute-url";
-
-const FALLBACK_SITE = "https://u-shopia.vercel.app/";
 
 export async function generateMetadata({
   params,
@@ -22,7 +21,7 @@ export async function generateMetadata({
   ]);
   const productsT = (dictionary as { products?: Record<string, string> }).products ?? {};
   const meta = dictionary.common.metadata;
-  const siteOrigin = (process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE).replace(/\/$/, "");
+  const siteOrigin = SITE_ORIGIN;
   const suffix = meta.title;
   const siteName = meta.siteName;
 
@@ -105,7 +104,7 @@ export default async function ProductDetailsPage({
     notFound();
   }
 
-  const siteOrigin = (process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE).replace(/\/$/, "");
+  const siteOrigin = SITE_ORIGIN;
 
   return (
     <>

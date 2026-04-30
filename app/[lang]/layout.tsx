@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 import "@fontsource/poppins/latin-400.css";
@@ -11,6 +12,7 @@ import "@fontsource/tajawal/arabic-700.css";
 import "@fontsource/pacifico/latin-400.css";
 import Providers from "./providers";
 import { getDictionary, hasLocale } from "./dictionaries";
+import { FALLBACK_SITE_URL, SITE_ORIGIN } from "@/data/costants";
 import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/header/Navbar";
 import { rtlLanguages } from "@/data/variables";
@@ -29,7 +31,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
   /** Parallel route slot; unused here but required to match layout props in Next.js 16. */
   modal: ReactNode;
-}) {
+}): Promise<Metadata> {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
 
@@ -38,7 +40,7 @@ export async function generateMetadata({
     description: dictionary?.common?.metadata?.description,
     author: dictionary?.common?.metadata?.author,
     siteName: dictionary?.common?.metadata?.siteName,
-    siteUrl: "https://u-shopia.vercel.app/",
+    siteUrl: FALLBACK_SITE_URL,
     keywords: [
       "uShopia",
       "online store",
@@ -54,7 +56,8 @@ export async function generateMetadata({
     ],
   };
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? metaData.siteUrl;
+  const siteUrl = SITE_ORIGIN || metaData.siteUrl.replace(/\/$/, "");
+  const canonicalPath = `/${lang}`;
 
   return {
     metadataBase: new URL(siteUrl),
@@ -64,9 +67,24 @@ export async function generateMetadata({
       default: dictionary.home.title,
     },
     description: metaData.description,
+    alternates: {
+      canonical: canonicalPath,
+      languages: {
+        en: `${siteUrl}/en`,
+        ar: `${siteUrl}/ar`,
+        "x-default": `${siteUrl}/en`,
+      },
+    },
     robots: {
       index: true,
       follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
     },
     applicationName: metaData.siteName,
     keywords: metaData.keywords,
@@ -81,9 +99,14 @@ export async function generateMetadata({
       title: `${dictionary.home.title} | ${metaData.title}`,
       description: metaData.description,
       siteName: metaData.siteName,
-      url: siteUrl,
+      url: `${siteUrl}${canonicalPath}`,
       type: "website",
       locale: lang === "ar" ? "ar_SA" : "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${dictionary.home.title} | ${metaData.title}`,
+      description: metaData.description,
     },
   };
 }
