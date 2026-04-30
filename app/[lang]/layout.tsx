@@ -108,6 +108,9 @@ export async function generateMetadata({
       title: `${dictionary.home.title} | ${metaData.title}`,
       description: metaData.description,
     },
+    verification: {
+      google: "0lLYUOhvd2KHb4IwuZ2yIWDjjqsMsGv00EmhZS952Vc",
+    },
   };
 }
 
